@@ -1,5 +1,7 @@
 var express = require("express");
 var app = express();
+var moment = require("moment");
+moment().format();
 
 var output = {
 	"unix": null,
@@ -27,13 +29,12 @@ app.get('/date/:thedate', function(req,res){
 			day = strArray[1].substr(0,2);
 		}
 		year = strArray[2];
-		console.log(month + " " + day + " " + year + "(SDS)");
 	}
 
 	
 
 	if (Number.isInteger(theDate) && theDate >= 0){
-		var workingDate = new Date(theDate);
+		var workingDate = moment(theDate);
 		output.unix = theDate;
 		output.natural = months[workingDate.getMonth()] + " " + workingDate.getDate() + ", " + workingDate.getFullYear();
 		res.send(JSON.stringify(output));
