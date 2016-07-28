@@ -40,7 +40,7 @@ app.get('/date/:thedate', function(req,res){
 
 	}else if(months.indexOf(month) != -1 && day > 0 && year > 0 ){
 		var workingDate = new Date(strDate);
-		output.unix = workingDate.getTime();
+		output.unix = workingDate.getTime() / 1000;
 		output.natural = strDate;
 		res.send(JSON.stringify(output));
 	}else {
