@@ -14,7 +14,7 @@ app.get('/', function(req, res){
 });
 
 app.get('/date/:thedate', function(req,res){
-	var theDate = parseInt(req.params.thedate);
+	var theDate = parseInt(req.params.thedate, 10);
 	var strDate = req.params.thedate;
 	var strArray = req.params.thedate.split(" ");
 	console.log(req.params.thedate);
@@ -32,7 +32,8 @@ app.get('/date/:thedate', function(req,res){
 	
 
 	if (Number.isInteger(theDate) && theDate >= 0){
-		var workingDate = new Date(theDate);
+		var workingDate = new Date(theDate * 1000);
+		console.log(workingDate + " workingDate");
 		output.unix = theDate;
 		output.natural = months[workingDate.getMonth()] + " " + workingDate.getDate() + ", " + workingDate.getFullYear();
 		res.send(JSON.stringify(output));
