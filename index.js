@@ -10,7 +10,15 @@ var months = ["January", "February", "March", "April", "May", "June", "July", "A
 var month,day,year;
 
 app.get('/', function(req, res){
-	res.send('hello world!');
+	var fileName = path.join(__dirname, 'index.html');
+	res.sendFile(fileName, function(err){
+		if (err) {
+			console.log(err);
+			res.status(err.status).end();
+		}else {
+			console.log('Sent: ', fileName);
+		}
+	});
 });
 
 app.get('/date/:thedate', function(req,res){
